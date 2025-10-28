@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FixLab - Platform Teknisi Laptop #1 di Sumut</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #1e293b;
+            background: #f8fafc;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(6, 182, 212, 0.1);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #475569;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #06b6d4;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #06b6d4;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+            color: white;
+            padding: 0.75rem 1.8rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(6, 182, 212, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #06b6d4;
+            padding: 0.75rem 1.8rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            border: 2px solid #06b6d4;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background: #06b6d4;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            color: white;
+            padding: 6rem 5% 8rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, #06b6d4 0%, #22d3ee 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            max-width: 950px;
+            margin: -5rem auto 0;
+            position: relative;
+            z-index: 10;
+            border: 1px solid rgba(6, 182, 212, 0.1);
+        }
+
+        .search-input {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+
+        .search-input input,
+        .search-input select {
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .search-input input:focus,
+        .search-input select:focus {
+            outline: none;
+            border-color: #06b6d4;
+            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+        }
+
+        .gps-button {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .gps-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .features {
+            padding: 6rem 5%;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            color: #0f172a;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 4rem;
+            font-size: 1.15rem;
+            font-weight: 500;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 40px rgba(6, 182, 212, 0.15);
+            border-color: rgba(6, 182, 212, 0.3);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 2.2rem;
+            box-shadow: 0 8px 20px rgba(6, 182, 212, 0.25);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #0f172a;
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            color: #64748b;
+            line-height: 1.8;
+            font-weight: 500;
+        }
+
+        .technician-section {
+            background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+            padding: 6rem 5%;
+        }
+
+        .filter-section {
+            max-width: 1300px;
+            margin: 0 auto 3rem;
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        .filter-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+
+        .filter-options select {
+            padding: 0.9rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .filter-options select:focus {
+            outline: none;
+            border-color: #06b6d4;
+            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+        }
+
+        .technician-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .technician-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        .technician-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 40px rgba(6, 182, 212, 0.15);
+        }
+
+        .tech-badge {
+            position: absolute;
+            top: 1.2rem;
+            right: 1.2rem;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            z-index: 1;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .tech-image {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4.5rem;
+            color: white;
+        }
+
+        .tech-info {
+            padding: 2rem;
+        }
+
+        .tech-name {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: #0f172a;
+        }
+
+        .tech-location {
+            color: #64748b;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .tech-distance {
+            color: #10b981;
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 0.7rem;
+        }
+
+        .tech-rating {
+            color: #f59e0b;
+            margin-bottom: 0.7rem;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .tech-price {
+            color: #06b6d4;
+            font-weight: 800;
+            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .tech-speciality {
+            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+            color: #0369a1;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            padding: 6rem 5%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 50%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+        }
+
+        .cta-section h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+            font-weight: 500;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer {
+            background: #0f172a;
+            color: white;
+            padding: 4rem 5% 3rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1300px;
+            margin: 0 auto 3rem;
+        }
+
+        .footer-logo {
+            margin-bottom: 2rem;
+        }
+
+        .social-media {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            background: rgba(6, 182, 212, 0.1);
+            border: 2px solid rgba(6, 182, 212, 0.3);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #06b6d4;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            background: #06b6d4;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(6, 182, 212, 0.4);
+            border-color: #06b6d4;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2.5rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            border-top: 1px solid rgba(148, 163, 184, 0.1);
+            padding-top: 2rem;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .footer-links a:hover {
+            color: #06b6d4;
+        }
+
+        .footer p {
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .search-input {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            ⚡ FixLab
+        </div>
+        <ul class="nav-links">
+            <li><a href="#beranda">Beranda</a></li>
+            <li><a href="#teknisi">Cari Teknisi</a></li>
+            <li><a href="#layanan">Layanan</a></li>
+            <li><a href="#tentang">Tentang</a></li>
+        </ul>
+        <a href="#daftar" class="btn-primary">Daftar Teknisi</a>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Laptop Rusak? <span>FixLab</span> Solusinya!</h1>
+            <p>Temukan teknisi laptop terbaik di Sumatera Utara dalam hitungan detik</p>
+            <div class="hero-buttons">
+                <a href="#teknisi" class="btn-primary">Cari Teknisi Sekarang</a>
+                <a href="#layanan" class="btn-secondary">Lihat Layanan</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="search-box">
+        <div class="search-input">
+            <select>
+                <option value="">📍 Pilih Lokasi</option>
+                <option value="medan">Medan</option>
+                <option value="binjai">Binjai</option>
+                <option value="pematangsiantar">Pematang Siantar</option>
+                <option value="tebingtinggi">Tebing Tinggi</option>
+                <option value="deli-serdang">Deli Serdang</option>
+                <option value="langkat">Langkat</option>
+                <option value="simalungun">Simalungun</option>
+                <option value="asahan">Asahan</option>
+            </select>
+            <select>
+                <option value="">🔧 Masalah Laptop</option>
+                <option value="hardware">Kerusakan Hardware</option>
+                <option value="software">Error Software/Windows</option>
+                <option value="slow">Laptop Lemot</option>
+                <option value="virus">Virus/Malware</option>
+                <option value="upgrade">Upgrade Komponen</option>
+                <option value="datarecovery">Data Hilang/Corrupt</option>
+                <option value="gaming">Optimasi Gaming</option>
+                <option value="macbook">Service Macbook</option>
+            </select>
+            <input type="number" placeholder="💰 Budget Maksimal (Rp)">
+            <button class="gps-button">📍 Lokasi Saya</button>
+            <button class="btn-primary">🔍 Cari Teknisi</button>
+        </div>
+    </div>
+
+    <section class="features" id="layanan">
+        <h2 class="section-title">Kenapa Pilih FixLab?</h2>
+        <p class="section-subtitle">Platform teknisi laptop paling lengkap di Sumut</p>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">✓</div>
+                <h3>Teknisi Terverifikasi</h3>
+                <p>Semua teknisi sudah melalui verifikasi keahlian dan memiliki sertifikat resmi</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📍</div>
+                <h3>Pencarian GPS Real-time</h3>
+                <p>Langsung temukan teknisi terdekat dari lokasi kamu dengan tracking GPS</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⭐</div>
+                <h3>Rating & Review Asli</h3>
+                <p>Baca ulasan dan rating dari customer sebelumnya untuk pilih teknisi terpercaya</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3>Harga Transparan</h3>
+                <p>Bandingkan harga dari berbagai teknisi dan pilih yang sesuai budget</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Rekomendasi Smart</h3>
+                <p>Sistem otomatis kasih rekomendasi teknisi yang paling cocok buat kamu</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <h3>Garansi Service</h3>
+                <p>Setiap perbaikan dilindungi garansi untuk kepuasan maksimal</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="technician-section" id="teknisi">
+        <h2 class="section-title">Teknisi Terpercaya di Sumatera Utara</h2>
+        <p class="section-subtitle">Dipilih khusus untuk kamu berdasarkan lokasi dan kebutuhan</p>
+        
+        <div class="filter-section">
+            <div class="filter-options">
+                <select>
+                    <option value="">Urutkan: Paling Relevan</option>
+                    <option value="recommended">Rekomendasi untuk Kamu</option>
+                    <option value="distance">Terdekat</option>
+                    <option value="rating">Rating Tertinggi</option>
+                    <option value="price-low">Harga Termurah</option>
+                    <option value="price-high">Harga Termahal</option>
+                </select>
+                <select>
+                    <option value="">Semua Harga</option>
+                    <option value="50k">Di bawah Rp 50.000</option>
+                    <option value="100k">Rp 50.000 - 100.000</option>
+                    <option value="200k">Rp 100.000 - 200.000</option>
+                    <option value="200k+">Di atas Rp 200.000</option>
+                </select>
+                <select>
+                    <option value="">Semua Jarak</option>
+                    <option value="5km">Dalam 5 km</option>
+                    <option value="10km">Dalam 10 km</option>
+                    <option value="20km">Dalam 20 km</option>
+                </select>
+                <select>
+                    <option value="">Rating Minimal</option>
+                    <option value="3">⭐ 3.0+</option>
+                    <option value="4">⭐ 4.0+</option>
+                    <option value="4.5">⭐ 4.5+</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="technician-grid">
+            <div class="technician-card">
+                <div class="tech-badge">Rekomendasi</div>
+                <div class="tech-image">👨‍💻</div>
+                <div class="tech-info">
+                    <div class="tech-name">Budi Santoso</div>
+                    <div class="tech-location">📍 Medan Kota</div>
+                    <div class="tech-distance">🚗 2.3 km dari lokasi kamu</div>
+                    <div class="tech-rating">⭐ 4.9 (127 review)</div>
+                    <div class="tech-price">Rp 75.000 - 150.000</div>
+                    <div>
+                        <span class="tech-speciality">Hardware</span>
+                        <span class="tech-speciality">Software</span>
+                        <span class="tech-speciality">Gaming</span>
+                    </div>
+                    <p style="margin-top: 1.2rem; color: #64748b; font-size: 0.95rem; font-weight: 500;">8 tahun pengalaman | Bersertifikat | Garansi 30 hari</p>
+                    <button class="btn-primary" style="width: 100%; margin-top: 1.5rem;">Hubungi Sekarang</button>
+                </div>
+            </div>
+
+            <div class="technician-card">
+                <div class="tech-badge">Top Rated</div>
+                <div class="tech-image">👨‍🔧</div>
+                <div class="tech-info">
+                    <div class="tech-name">Ahmad Rizky</div>
+                    <div class="tech-location">📍 Binjai</div>
+                    <div class="tech-distance">🚗 5.7 km dari lokasi kamu</div>
+                    <div class="tech-rating">⭐ 5.0 (94 review)</div>
+                    <div class="tech-price">Rp 100.000 - 250.000</div>
+                    <div>
+                        <span class="tech-speciality">Macbook</span>
+                        <span class="tech-speciality">Upgrade</span>
+                    </div>
+                    <p style="margin-top: 1.2rem; color: #64748b; font-size: 0.95rem; font-weight: 500;">Spesialis Apple | 10 tahun pengalaman | Parts Original</p>
+                    <button class="btn-primary" style="width: 100%; margin-top: 1.5rem;">Hubungi Sekarang</button>
+                </div>
+            </div>
+
+            <div class="technician-card">
+                <div class="tech-badge">Terdekat</div>
+                <div class="tech-image">👩‍💻</div>
+                <div class="tech-info">
+                    <div class="tech-name">Siti Rahma</div>
+                    <div class="tech-location">📍 Pematang Siantar</div>
+                    <div class="tech-distance">🚗 1.2 km dari lokasi kamu</div>
+                    <div class="tech-rating">⭐ 4.8 (156 review)</div>
+                    <div class="tech-price">Rp 50.000 - 120.000</div>
+                    <div>
+                        <span class="tech-speciality">Data Recovery</span>
+                        <span class="tech-speciality">Virus</span>
+                    </div>
+                    <p style="margin-top: 1.2rem; color: #64748b; font-size: 0.95rem; font-weight: 500;">Ahli keamanan data | Sertifikat | Layanan 24/7</p>
+                    <button class="btn-primary" style="width: 100%; margin-top: 1.5rem;">Hubungi Sekarang</button>
+                </div>
+            </div>
+
+            <div class="technician-card">
+                <div class="tech-image">👨‍💼</div>
+                <div class="tech-info">
+                    <div class="tech-name">Rizal Pratama</div>
+                    <div class="tech-location">📍 Tebing Tinggi</div>
+                    <div class="tech-distance">🚗 8.5 km dari lokasi kamu</div>
+                    <div class="tech-rating">⭐ 4.7 (89 review)</div>
+                    <div class="tech-price">Rp 60.000 - 130.000</div>
+                    <div>
+                        <span class="tech-speciality">Screen Repair</span>
+                        <span class="tech-speciality">Keyboard</span>
+                    </div>
+                    <p style="margin-top: 1.2rem; color: #64748b; font-size: 0.95rem; font-weight: 500;">6 tahun pengalaman | Fast service | Free konsultasi</p>
+                    <button class="btn-primary" style="width: 100%; margin-top: 1.5rem;">Hubungi Sekarang</button>
+                </div>
+            </div>
+
+            <div class="technician-card">
+                <div class="tech-image">👨‍🔬</div>
+                <div class="tech-info">
+                    <div class="tech-name">Fauzi Rahman</div>
+                    <div class="tech-location">📍 Deli Serdang</div>
+                    <div class="tech-distance">🚗 4.1 km dari lokasi kamu</div>
+                    <div class="tech-rating">⭐ 4.9 (112 review)</div>
+                    <div class="tech-price">Rp 80.000 - 180.000</div>
+                    <div>
+                        <span class="tech-speciality">Motherboard</span>
+                        <span class="tech-speciality">IC Repair</span>
+                    </div>
+                    <p style="margin-top: 1.2rem; color: #64748b; font-size: 0.95rem; font-weight: 500;">Spesialis hardware | Alat lengkap | Garansi service</p>
+                    <button class="btn-primary" style="width: 100%; margin-top: 1.5rem;">Hubungi Sekarang</button>
+                </div>
+            </div>
+
+            <div class="technician-card">
+                <div class="tech-image">👩‍🔧</div>
+                <div class="tech-info">
+                    <div class="tech-name">Dewi Anggraini</div>
+                    <div class="tech-location">📍 Medan Helvetia</div>
+                    <div class="tech-distance">🚗 3.8 km dari lokasi kamu</div>
+                    <div class="tech-rating">⭐ 4.8 (143 review)</div>
+                    <div class="tech-price">Rp 55.000 - 125.000</div>
+                    <div>
+                        <span class="tech-speciality">Install Ulang</span>
+                        <span class="tech-speciality">Update Driver</span>
+                    </div>
+                    <p style="margin-top: 1.2rem; color: #64748b; font-size: 0.95rem; font-weight: 500;">5 tahun pengalaman | Ramah & sabar | Home service</p>
+                    <button class="btn-primary" style="width: 100%; margin-top: 1.5rem;">Hubungi Sekarang</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section" id="daftar">
+        <h2>Laptop Bermasalah? Jangan Panik!</h2>
+        <p>Temukan teknisi terpercaya dengan mudah dan cepat di FixLab</p>
+        <div class="cta-buttons">
+            <a href="#teknisi" class="btn-secondary">Cari Teknisi</a>
+            <button class="btn-primary">Daftar Jadi Teknisi</button>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div style="font-size: 2rem; font-weight: 800; background: linear-gradient(135deg, #06b6d4 0%, #22d3ee 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1rem;">
+                    ⚡ FixLab
+                </div>
+                <p style="color: #64748b; max-width: 300px; margin: 0 auto 1.5rem; font-weight: 500;">
+                    Platform teknisi laptop terpercaya di Sumatera Utara. Temukan solusi terbaik untuk laptop kamu!
+                </p>
+                <div class="social-media">
+                    <a href="#" class="social-icon" aria-label="Instagram">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Facebook">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Twitter">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="WhatsApp">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="TikTok">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-links">
+            <a href="#tentang">Tentang Kami</a>
+            <a href="#syarat">Syarat & Ketentuan</a>
+            <a href="#privasi">Kebijakan Privasi</a>
+            <a href="#kontak">Kontak</a>
+            <a href="#faq">FAQ</a>
+        </div>
+        <p style="margin-top: 2rem;">&copy; 2025 FixLab - Platform Teknisi Laptop #1 di Sumatera Utara</p>
+    </footer>
+</body>
+</html>
